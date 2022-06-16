@@ -21,18 +21,18 @@ public class Item {
     )
     private long id;
     private String name;
-    private float price;
+    private Float price;
 
     public Item() {
     }
 
-    public Item(long id, String name, float price) {
+    public Item(long id, String name, Float price) {
         this.id = id;
         this.name = name;
         this.price = price;
     }
 
-    public Item(String name, float price) {
+    public Item(String name, Float price) {
         this.name = name;
         this.price = price;
     }
