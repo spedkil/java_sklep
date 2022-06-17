@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class ItemService {
@@ -47,5 +48,13 @@ public class ItemService {
         if(price > 0.0f && !Objects.equals(item.getPrice(), price)){
             item.setPrice(price);
         }
+    }
+
+    public Optional<Item> getItem(Long itemId) {
+        boolean exists = itemRepository.existsById(itemId);
+        if(!exists){
+            throw new IllegalStateException("item with id" + itemId + "does not exist");
+        }
+        return itemRepository.findById(itemId);
     }
 }
