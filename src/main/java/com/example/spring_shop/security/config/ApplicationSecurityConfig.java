@@ -1,5 +1,6 @@
 package com.example.spring_shop.security.config;
 
+import com.example.spring_shop.appuser.AppUserRole;
 import com.example.spring_shop.appuser.AppUserService;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -23,13 +24,15 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.
                 authorizeRequests().
-                antMatchers("/", "index", "/css/*", "/js/*", "/api/registration/**").
+                antMatchers("/", "index", "/css/*", "/js/*",
+                        "/webjars/bootstrap/4.3.1/**", "/register", "/process_register", "/confirm").
                 permitAll().
+                antMatchers("/management/**").hasAuthority("ADMIN").
                 anyRequest().
                 authenticated().
                 and().
                 formLogin().
-                and().httpBasic();
+                and().exceptionHandling().accessDeniedPage("/403");
 
         http.cors().and().csrf().disable();
     }

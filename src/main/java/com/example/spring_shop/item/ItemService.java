@@ -50,11 +50,11 @@ public class ItemService {
         }
     }
 
-    public Optional<Item> getItem(Long itemId) {
-        boolean exists = itemRepository.existsById(itemId);
-        if(!exists){
+    public Item getItem(Long itemId) {
+        Optional<Item> res = itemRepository.findById(itemId);
+        if(!res.isPresent()){
             throw new IllegalStateException("item with id" + itemId + "does not exist");
         }
-        return itemRepository.findById(itemId);
+        return res.get();
     }
 }
