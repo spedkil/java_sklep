@@ -28,7 +28,8 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 anyRequest().
                 authenticated().
                 and().
-                formLogin();
+                formLogin().
+                and().httpBasic();
 
         http.cors().and().csrf().disable();
     }
